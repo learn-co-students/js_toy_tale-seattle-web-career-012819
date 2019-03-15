@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 5
+      "likes": 6
     },
     {
       "id": 2,
@@ -47,6 +47,52 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
+    },
+    {
+      "name": "ToyJohnGlenn",
+      "image": "https://myfavoritewesterns.files.wordpress.com/2016/12/john-glenn-young.jpg",
+      "id": 9
+    },
+    {
+      "name": "ToyJohnGlenn",
+      "image": "https://myfavoritewesterns.files.wordpress.com/2016/12/john-glenn-young.jpg",
+      "id": 10
+    },
+    {
+      "likes": 0,
+      "name": "ToyJohnGlenn",
+      "image": "https://myfavoritewesterns.files.wordpress.com/2016/12/john-glenn-young.jpg",
+      "id": 11
+    },
+    {
+      "likes": 0,
+      "name": "Dr. Troll",
+      "image": "https://images.prod.meredith.com/product/a4f35a18ecd207aa7aeb2629934d4d07/1534064357787/l/my-lucky-medical-doctor-troll-doll",
+      "id": 12
+    },
+    {
+      "likes": 0,
+      "name": "Dr. Troll",
+      "image": "https://images.prod.meredith.com/product/a4f35a18ecd207aa7aeb2629934d4d07/1534064357787/l/my-lucky-medical-doctor-troll-doll",
+      "id": 13
+    },
+    {
+      "likes": 0,
+      "name": "Dr. Troll",
+      "image": "https://images.prod.meredith.com/product/a4f35a18ecd207aa7aeb2629934d4d07/1534064357787/l/my-lucky-medical-doctor-troll-doll",
+      "id": 14
+    },
+    {
+      "likes": 0,
+      "name": "Dr. Evel Troll",
+      "image": "https://images.prod.meredith.com/product/a124b61d5e4b9664c4bd39d49d9fbec6/1538454219881/l/vintage-troll-doll-1960s-uneeda-wishnik-kitsch-collectibles",
+      "id": 15
+    },
+    {
+      "likes": 0,
+      "name": "Dr. Evel Troll",
+      "image": "https://images.prod.meredith.com/product/a124b61d5e4b9664c4bd39d49d9fbec6/1538454219881/l/vintage-troll-doll-1960s-uneeda-wishnik-kitsch-collectibles",
+      "id": 16
     }
   ]
 }
