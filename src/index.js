@@ -48,6 +48,7 @@ function createToyCard(data){
   let button = document.createElement('button')
   button.className = 'like-btn'
   button.innerText = "Like <3"
+  button.addEventListener("click", () => (incrementLikes(data)))
 
 
   toys.appendChild(cardDiv)
@@ -75,4 +76,16 @@ function fetchNewToy() {
   })
     .then(response => response.json())
     .then(json => createToyCard(json))
+}
+
+function incrementLikes(toy) {
+  let body = {likes: toy.likes += 1}
+  let bodyJSON = JSON.stringify(body)
+  
+  fetch(TOYS_URL + "/" + toy.id, {
+    method: "PATCH",
+    headers: {"Content-Type": 'application/json',
+    Accept: "application/json"},
+    body: bodyJSON
+  })
 }
