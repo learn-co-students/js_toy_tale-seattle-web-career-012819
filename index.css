@@ -56,6 +56,12 @@ button:hover {
   color: #e04b52;
 }
 
+button:disabled {
+  background-color: grey;
+  border: white solid 1px;
+  color: white;
+}
+
 .container {
   padding: 1rem;
   width: stretch;
