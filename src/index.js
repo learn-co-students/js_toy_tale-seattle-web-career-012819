@@ -46,6 +46,12 @@ function createToyCard(toyObject) {
 	let likeButton = document.createElement('button');
 	likeButton.className = 'like-button';
 	likeButton.textContent = 'Like <3';
+	//like button likes things
+	likeButton.addEventListener('click', ()=>{
+		toyObject.likes++;
+		likes.innerText = `${toyObject.likes} like(s)`;
+		patchLikeData(toyObject);
+	});
 	//append
 	card.appendChild(toyName);
 	card.appendChild(image);
@@ -55,4 +61,53 @@ function createToyCard(toyObject) {
 	toyCollection.appendChild(card);
 }
 
+function createNewToy(){
+	const createToyForm = document.getElementsByClassName('add-toy-form')[0];
+	createToyForm.addEventListener('submit', (event)=>{
+		event.preventDefault();
+		let newToyName = document.getElementById('toy-name').value
+		let newToyUrl = document.getElementById('toy-url').value
+		//front end validation
+		if ((newToyUrl === "") || (newToyName === "")){
+			alert("new toys need a name and an image url");
+		}else{
+			let newToy = {
+				name: newToyName,
+				image: newToyUrl,
+				likes: 0
+			};
+			//create and persists toy
+			sendToyData(newToy);
+			createToyCard(newToy);
+		}
+	})
+}
+
+function sendToyData(toyObject) {
+  return fetch(TOYS_URL,{
+		method: "POST",
+		headers:
+		{
+		  "Content-Type": "application/json",
+		  Accept: "application/json"
+		},
+		body: JSON.stringify(toyObject)
+	})
+	.then((response)=>{
+		return response.json();
+	});
+}
+
+function patchLikeData(toyObject) {
+  fetch(`${TOYS_URL}/${toyObject.id}`,{
+		method: "PATCH",
+		headers:
+		{
+		  "Content-Type": "application/json",
+		  Accept: "application/json"
+		},
+		body: JSON.stringify(toyObject)
+	});
+}
+createNewToy();
 fetchToy();
