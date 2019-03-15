@@ -35,6 +35,7 @@ function createToyCard(toy) {
   p.textContent = toy.likes
   let button = document.createElement('button')
   button.className = 'like-btn'
+  button.addEventListener('click', () => increaseLikes(toy, card))
 
   card.appendChild(h2)
   card.appendChild(img)
@@ -46,24 +47,19 @@ function createToyCard(toy) {
 
 function addNewToy() {
   let userToyInput = getUserToyInput()
-
+  let jsonBody = JSON.stringify({
+    'name': userToyInput.name,
+    'image': userToyInput.image,
+    'likes': 0
+  })
   fetch(TOYS_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json'
     },
-    body: {
-      'name': userToyInput.name,
-      'image': userToyInput.image,
-      'likes': 0
-    }
+    body: jsonBody
   })
-  .then(response => response.json())
-    .then(json => {
-
-      debugger
-    })
 
 }
 
@@ -71,6 +67,29 @@ function getUserToyInput(){
   let name = document.getElementsByName('name')[0].value
   let image = document.getElementsByName('image')[0].value
   return new_toy = {'name': name, 'image': image}
+}
+
+function increaseLikes(toy, card){
+  let toy_id = toy.id
+  let toy_likes = toy.likes + 1
+  let TOY_URL = TOYS_URL + '/' + toy_id
+  let jsonBody = JSON.stringify({
+    'likes': toy_likes
+  })
+
+  fetch(TOY_URL, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: jsonBody
+  })
+  .then(response => response.json())
+  .then(json => {
+    let p = card.getElementsByTagName('p')[0]
+    p.textContent = json.likes
+  })
 }
 
 addBtn.addEventListener('click', () => {
