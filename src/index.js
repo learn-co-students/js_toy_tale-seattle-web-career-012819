@@ -1,6 +1,9 @@
 const addBtn = document.querySelector('#new-toy-btn');
 const toyForm = document.querySelector('.container');
 const toyCollection = document.getElementById("toy-collection");
+const textboxName = document.getElementById("textbox-name");
+const textboxImage = document.getElementById("textbox-image");
+const newToyButton = document.getElementById("new-toy-button");
 let addToy = false;
 
 addBtn.addEventListener('click', () => {
@@ -14,8 +17,15 @@ addBtn.addEventListener('click', () => {
   }
 })
 
+newToyButton.addEventListener("click", (ev) => {
+  ev.preventDefault();
 
-//ask tcf about structure/contents of response
+  let name = textboxName.value;
+  let image = textboxImage.value;
+
+  addNewToy(name, image);
+})
+
 fetch("http://localhost:3000/toys")
 .then(response => response.json())
 .then(json => {
@@ -82,11 +92,11 @@ function updateDatabaseLikes(toy, likes){
   })
 }
 
-function addNewToy(toy){
+function addNewToy(name, image){
   let data = {
-    "name": toy.name,
-    "image": toy.image,
-    "likes": toy.likes
+    "name": name,
+    "image": image,
+    "likes": 0
   }
 
   fetch("http://localhost:3000/toys", {
@@ -98,9 +108,8 @@ function addNewToy(toy){
     },
     body: JSON.stringify(data)
   })
-  .then(response => response.json)
+  .then(response => response.json())
   .then(json => {
-    console.log("I'm in the JSON response!", "Data", data, "JSON", json);
-    debugger
+    makeToyCard(json);
   })
 }
