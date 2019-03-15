@@ -25,7 +25,7 @@ fetch("http://localhost:3000/toys")
 function addAllToToyCollection (toys) {
   for (const toy of toys) {
     makeToyCard(toy);
-  } 
+  }
 }
 
 function makeToyCard(toy) {
@@ -39,6 +39,11 @@ function makeToyCard(toy) {
   let cardImg = document.createElement("img");
   let cardP = document.createElement("p");
   let cardButton = document.createElement("button");
+
+  cardButton.addEventListener("click", () => {
+    addLike(likes, cardP)
+    updateDatabaseLikes(toy)
+  });
 
   cardDiv.className = "card";
   cardImg.className = "toy-avatar";
@@ -55,4 +60,32 @@ function makeToyCard(toy) {
   cardButton.textContent = "Like <3";
 
   toyCollection.appendChild(cardDiv);
+}
+
+function addLike(likes, cardP){
+  likes++;
+  cardP.textContent = `${likes} likes`;
+}
+
+function updateDatabaseLikes(toy){
+  let data = {
+    "name": toy.name,
+    "image": toy.image,
+    "likes": toy.likes
+  }
+
+  fetch("http://localhost:3000/toys", {
+    method: "POST",
+    headers:
+    {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json)
+  .then(json => {
+    console.log("I'm in the JSON response!", "Data", data, "JSON", json);
+    debugger
+  })
 }
