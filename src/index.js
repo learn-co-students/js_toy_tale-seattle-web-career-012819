@@ -41,8 +41,8 @@ function makeToyCard(toy) {
   let cardButton = document.createElement("button");
 
   cardButton.addEventListener("click", () => {
-    addLike(likes, cardP)
-    updateDatabaseLikes(toy)
+    likes = addLike(likes, cardP)
+    updateDatabaseLikes(toy, likes)
   });
 
   cardDiv.className = "card";
@@ -65,9 +65,24 @@ function makeToyCard(toy) {
 function addLike(likes, cardP){
   likes++;
   cardP.textContent = `${likes} likes`;
+  return likes
 }
 
-function updateDatabaseLikes(toy){
+function updateDatabaseLikes(toy, likes){
+  let data = {"likes": likes}
+
+  fetch(`http://localhost:3000/toys/${toy.id}`, {
+    method: "PATCH",
+    headers:
+    {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+}
+
+function addNewToy(toy){
   let data = {
     "name": toy.name,
     "image": toy.image,
