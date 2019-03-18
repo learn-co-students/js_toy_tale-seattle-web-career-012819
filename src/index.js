@@ -61,16 +61,7 @@ function makeAToy(toy) {
 	likeButton.textContent = 'Like <3';
 	likeButton.onclick = () => {
 		toy.likes++;
-		fetch(`${TOYS}/${toy.id}`, {
-			method: 'PATCH',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-			body: JSON.stringify({ likes: `${toy.likes}` })
-		})
-			.then((response) => response.json())
-			.then((json) => {
-				toy.likes = json['likes'];
-				likes.textContent = `${toy.likes} Likes`;
-			});
+		incrementLikes(toy, likes);
 	};
 	toys.appendChild(card);
 	card.appendChild(name);
@@ -79,6 +70,17 @@ function makeAToy(toy) {
 	card.appendChild(likeButton);
 }
 
-function incrementLikes(toy) {}
+function incrementLikes(toy, likes) {
+	fetch(`${TOYS}/${toy.id}`, {
+		method: 'PATCH',
+		headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+		body: JSON.stringify({ likes: `${toy.likes}` })
+	})
+		.then((response) => response.json())
+		.then((json) => {
+			toy.likes = json['likes'];
+			likes.textContent = `${toy.likes} Likes`;
+		});
+}
 
 form.onsubmit = (e) => addNewToy(e);
