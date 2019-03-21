@@ -51,39 +51,40 @@ fetch(toyURL)
   return result.json();
 })
 .then(json => {
-  json.forEach((toy) => {
-    addNewToy(toy);
-  });
+  addNewToy(json);
 })
 
-function addNewToy(toy) {
+function addNewToy(data) {
   //Create Elements
-  const container = document.getElementById('toy-collection');
-  const div = document.createElement('div');
-  div.setAttribute('class', 'card');
-  div.setAttribute('id', toy.id);
-  const h2 = document.createElement('h2');
-  h2.innerText = toy.name;
-  const img = document.createElement('img');
-  img.setAttribute('class', 'toy-avatar');
-  img.src = toy.image;
-  const p = document.createElement('p');
-  p.innerText = `${toy.likes} Likes`;
-  const likeButton = document.createElement('button');
-  likeButton.setAttribute('class', 'like-btn');
-  likeButton.innerText = "Like <3";
-
-  //Append Elements
-  container.appendChild(div);
-  div.appendChild(h2);
-  div.appendChild(img);
-  div.appendChild(p);
-  div.appendChild(likeButton);
-
-  //Increase Likes Event Listener
-  likeButton.addEventListener('click', () => {
-    addLike(toy);
+  data.forEach((toy) => {
+    const container = document.getElementById('toy-collection');
+    const div = document.createElement('div');
+    div.setAttribute('class', 'card');
+    div.setAttribute('id', toy.id);
+    const h2 = document.createElement('h2');
+    h2.innerText = toy.name;
+    const img = document.createElement('img');
+    img.setAttribute('class', 'toy-avatar');
+    img.src = toy.image;
+    const p = document.createElement('p');
+    p.innerText = `${toy.likes} Likes`;
+    const likeButton = document.createElement('button');
+    likeButton.setAttribute('class', 'like-btn');
+    likeButton.innerText = "Like <3";
+  
+    //Append Elements
+    container.appendChild(div);
+    div.appendChild(h2);
+    div.appendChild(img);
+    div.appendChild(p);
+    div.appendChild(likeButton);
+  
+    //Increase Likes Event Listener
+    likeButton.addEventListener('click', () => {
+      addLike(toy);
+    })
   })
+  
 }
 
 
